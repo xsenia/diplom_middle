@@ -16,10 +16,11 @@ window.addEventListener('DOMContentLoaded', function() {
 
     dropdown();
 
+
     //popup
 
     const popup = () => {
-        const popupButtons = document.querySelectorAll('.callback-btn, .open-popup'),
+        const popupButtons = document.querySelectorAll('.open-popup'),
             popup = document.querySelectorAll('.popup');
 
             popup.forEach((elem) => {
@@ -28,7 +29,8 @@ window.addEventListener('DOMContentLoaded', function() {
 
             popupButtons.forEach((elem) => {
                 elem.addEventListener('click', (event) => {
-                    let target = event.target;
+                    let target = event.target.closest('.open-popup');
+                    target.classList.add('active');
                     let popupId = target.dataset.popup;
                     let popup = document.querySelector(popupId);
                     popup.style.display = (popup.style.display === 'none')  ? 'block' : 'none';                    
@@ -38,8 +40,13 @@ window.addEventListener('DOMContentLoaded', function() {
             popup.forEach((elem) => {
                 elem.addEventListener('click', (event) => {
                     let target = event.target;
-
                     if(target.closest('.close-form, .overlay')){
+                        const popupButtons = document.querySelectorAll('.open-popup');
+                        popupButtons.forEach((elem) => {
+                            elem.classList.remove('active');
+                            console.log('elem: ', elem.classList);
+                        });
+                        
                         popup.forEach((elem)=>{
                             if(elem.style.display = 'block') {
                                 elem.style.display = 'none'
@@ -51,7 +58,9 @@ window.addEventListener('DOMContentLoaded', function() {
 
     };
 
-    popup();
+    popup();   
+
+
 
     //fadingSlider
 
