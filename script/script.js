@@ -40,7 +40,7 @@ window.addEventListener('DOMContentLoaded', function() {
             popup.forEach((elem) => {
                 elem.addEventListener('click', (event) => {
                     let target = event.target;
-                    if(target.closest('.close-form, .overlay')){
+                    if(target.closest('.close-form, .overlay, nav.popup-menu ul li a')){
                         const popupButtons = document.querySelectorAll('.open-popup');
                         popupButtons.forEach((elem) => {
                             elem.classList.remove('active');

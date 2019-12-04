@@ -57,12 +57,12 @@
                 <li class="scroll"><a href="#gallery">Галерея</a></li>
                 <li class="scroll"><a href="#footer">Контакты</a></li>
             </ul>
-            <div class="menu-button hidden-large">
+            <div class="menu-button hidden-large open-popup" data-popup="#popupMenu">
                 <img src="images/menu-button.png" alt="">
             </div>
         </div>
     </nav>
-    <nav class="popup-menu hidden-large">
+    <nav id="popupMenu" class="popup popup-menu hidden-large">
         <div class="close-menu-btn">
             <img src="images/delete.png" alt="">
         </div>
@@ -76,9 +76,12 @@
         </ul>
     </nav>
     <div class="head-slider">
+        <div class="slider-image">
+            <img src="images/head-slider-1.png" alt="">
+        </div>
         <div class="wrapper">
             <div class="main-slider">
-                <div class="slide">
+                <div class="slide active">
                     <div class="slide-text">
                         <div class="offer-head">
                             <p class="top">2 круглосуточные</p>
@@ -92,7 +95,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="slide type2" style="display: none">
+                <div class="slide type2">
                     <div class="slide-text">
                         <div class="offer-head">
                             <p class="top">открытый чемпионат</p>
@@ -106,7 +109,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="slide" style="display: none">
+                <div class="slide">
                     <div class="slide-text">
                         <div class="offer-head">
                             <p class="top">без выходных</p>
@@ -116,12 +119,12 @@
                         </div>
                         <div class="validity">
                             <p> Записаться по телефону:
-                            </p>
+                                </p>
                             <span>+7 (800) 555-64-47</span>
                         </div>
                     </div>
                 </div>
-                <div class="slide type2 type3" style="display: none">
+                <div class="slide type2 type3">
                     <div class="slide-text">
                         <div class="offer-head">
                             <p class="top">Круглосуточно</p>
@@ -130,12 +133,12 @@
                         </div>
                         <div class="validity">
                             <p> Записаться по телефону:
-                            </p>
+                                </p>
                             <span>+7 (800) 555-64-47</span>
                         </div>
                     </div>
                 </div>
-                <div class="slide type2"  style="display: none">
+                <div class="slide type2" >
                     <div class="slide-text">
                         <div class="offer-head">
                             <p class="top">Пробное занятие</p>
@@ -152,6 +155,7 @@
 
             </div>
         </div>
+
     </div>
 </header>
 <div class="breadcrumbs">
@@ -321,86 +325,88 @@
     </div>
 </section>
 <section id="gallery">
-    <h2>Фотогалерея</h2>
-    <div class="gallery-bg">
-        <div class="wrapper">
-            <div class="gallery-slider">
-                <div class="slide">
-                    <img src="images/gallery/photo1.jpg" alt="">
-                </div>
-                <div class="slide">
-                    <img src="images/gallery/photo2.jpg" alt="">
-                </div>
-                <div class="slide">
-                    <img src="images/gallery/photo3.jpg" alt="">
-                </div>
-                <div class="slide">
-                    <img src="images/gallery/photo4.jpg" alt="">
-                </div>
-                <div class="slide">
-                    <img src="images/gallery/photo5.jpg" alt="">
+        <h2>Фотогалерея</h2>
+        <div class="gallery-bg">
+            <div class="wrapper">
+                <div class="gallery-slider">
+                    <div class="slide active">
+                        <img src="images/gallery/photo1.jpg" alt="">
+                    </div>
+                    <div class="slide">
+                        <img src="images/gallery/photo2.jpg" alt="">
+                    </div>
+                    <div class="slide">
+                        <img src="images/gallery/photo3.jpg" alt="">
+                    </div>
+                    <div class="slide">
+                        <img src="images/gallery/photo4.jpg" alt="">
+                    </div>
+                    <div class="slide">
+                        <img src="images/gallery/photo5.jpg" alt="">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 <section id="services">
-    <div class="wrapper">
-        <h2>услуги наших клубов</h2>
-        <div class="services-slider">
-            <div class="slide">
-                <img src="images/services-slider/akva.jpg" alt="Аква территория">
-                <h6>Аква территория</h6>
-                <p>Плавание полезно для людей абсолютно любой возрастной категории. Бассейн 5 на 6 метров.</p>
+        <div class="wrapper services-slider-main">
+            <h2>услуги наших клубов</h2>
+            <div class="services-slider">
+                <div class="slide">
+                    <img src="images/services-slider/akva.jpg" alt="Аква территория">
+                    <h6>Аква территория</h6>
+                    <p>Плавание полезно для людей абсолютно любой возрастной категории. Бассейн 5 на 6 метров.</p>
+                </div>
+                <div class="slide">
+                    <img src="images/services-slider/vesy.jpg" alt="Зона свободных весов">
+                    <h6>Зона свободных весов</h6>
+                    <p>Здесь есть всё необходимое, чтобы достичь максимальных результатов</p>
+                </div>
+                <div class="slide">
+                    <img src="images/services-slider/TRX.jpg" alt="Зона TRX">
+                    <h6>Зона TRX</h6>
+                    <p>Укрепление суставов и связок, увеличение мышечной массы, выносливости и гибкости</p>
+                </div>
+                <div class="slide">
+                    <img src="images/services-slider/kardio.jpg" alt="Кардиозона">
+                    <h6>Кардиозона</h6>
+                    <p>Эффективное снижение веса и улучшение работы сердечно-сосудистой системы</p>
+                </div>
+                <div class="slide">
+                    <img src="images/services-slider/yoga.jpg" alt="Йога">
+                    <h6>Йога</h6>
+                    <p>Йога - идеальны не только физическая форма, но и эмоциональное состояние</p>
+                </div>
+                <div class="slide">
+                    <img src="images/services-slider/akva.jpg" alt="Аква территория">
+                    <h6>Аква территория</h6>
+                    <p>Плавание полезно для людей абсолютно любой возрастной категории. Бассейн 5 на 6 метров.</p>
+                </div>
+                <div class="slide">
+                    <img src="images/services-slider/vesy.jpg" alt="Зона свободных весов">
+                    <h6>Зона свободных весов</h6>
+                    <p>Здесь есть всё необходимое, чтобы достичь максимальных результатов</p>
+                </div>
+                <div class="slide">
+                    <img src="images/services-slider/TRX.jpg" alt="Зона TRX">
+                    <h6>Зона TRX</h6>
+                    <p>Укрепление суставов и связок, увеличение мышечной массы, выносливости и гибкости</p>
+                </div>
+                <div class="slide">
+                    <img src="images/services-slider/kardio.jpg" alt="Кардиозона">
+                    <h6>Кардиозона</h6>
+                    <p>Эффективное снижение веса и улучшение работы сердечно-сосудистой системы</p>
+                </div>
+                <div class="slide">
+                    <img src="images/services-slider/yoga.jpg" alt="Йога">
+                    <h6>Йога</h6>
+                    <p>Йога - идеальны не только физическая форма, но и эмоциональное состояние</p>
+                </div>
             </div>
-            <div class="slide">
-                <img src="images/services-slider/vesy.jpg" alt="Зона свободных весов">
-                <h6>Зона свободных весов</h6>
-                <p>Здесь есть всё необходимое, чтобы достичь максимальных результатов</p>
-            </div>
-            <div class="slide">
-                <img src="images/services-slider/TRX.jpg" alt="Зона TRX">
-                <h6>Зона TRX</h6>
-                <p>Укрепление суставов и связок, увеличение мышечной массы, выносливости и гибкости</p>
-            </div>
-            <div class="slide">
-                <img src="images/services-slider/kardio.jpg" alt="Кардиозона">
-                <h6>Кардиозона</h6>
-                <p>Эффективное снижение веса и улучшение работы сердечно-сосудистой системы</p>
-            </div>
-            <div class="slide">
-                <img src="images/services-slider/yoga.jpg" alt="Йога">
-                <h6>Йога</h6>
-                <p>Йога - идеальны не только физическая форма, но и эмоциональное состояние</p>
-            </div>
-            <div class="slide">
-                <img src="images/services-slider/akva.jpg" alt="Аква территория">
-                <h6>Аква территория</h6>
-                <p>Плавание полезно для людей абсолютно любой возрастной категории. Бассейн 5 на 6 метров.</p>
-            </div>
-            <div class="slide">
-                <img src="images/services-slider/vesy.jpg" alt="Зона свободных весов">
-                <h6>Зона свободных весов</h6>
-                <p>Здесь есть всё необходимое, чтобы достичь максимальных результатов</p>
-            </div>
-            <div class="slide">
-                <img src="images/services-slider/TRX.jpg" alt="Зона TRX">
-                <h6>Зона TRX</h6>
-                <p>Укрепление суставов и связок, увеличение мышечной массы, выносливости и гибкости</p>
-            </div>
-            <div class="slide">
-                <img src="images/services-slider/kardio.jpg" alt="Кардиозона">
-                <h6>Кардиозона</h6>
-                <p>Эффективное снижение веса и улучшение работы сердечно-сосудистой системы</p>
-            </div>
-            <div class="slide">
-                <img src="images/services-slider/yoga.jpg" alt="Йога">
-                <h6>Йога</h6>
-                <p>Йога - идеальны не только физическая форма, но и эмоциональное состояние</p>
-            </div>
+            <!-- <div class="slider-arrow xs-slider__prev"><span><</span></div>
+            <div class="slider-arrow xs-slider__next"><span>></span></div> -->
         </div>
-    </div>
-</section>
+    </section>
 <section id="banner">
     <div class="wrapper">
         <h2>Записаться на бесплатный&nbsp;визит</h2>
