@@ -486,6 +486,89 @@ window.addEventListener('DOMContentLoaded', function() {
 
     getPrice();
 
+
+    //Send ajax form
+    const sendForm = (formId) => {
+        const errorMessage = 'Что то пошло не так',
+        warningMessage = 'Необходимо подтвердить согласие';
+
+        const form = document.getElementById(formId);
+        const thanks = document.getElementById('thanks');
+        const checkBox = document.getElementById('check1');
+
+        const statusMessage = document.createElement('div');
+        statusMessage.style.cssText = 'font-size: 20px;padding-top:10px;color:red;';
+        
+        form.addEventListener('submit', (event) => {
+            
+            event.preventDefault();
+            form.appendChild(statusMessage);
+
+            const formData = new FormData(form);
+            let body = {};             
+            formData.forEach((val,key) => {
+                body[key] = val; 
+            });            
+
+            if(checkBox.checked === false) {
+                statusMessage.textContent = warningMessage;
+                return;
+            } else {
+                statusMessage.textContent = '';
+            }            
+
+            postData(body,                
+                (error) => { statusMessage.textContent = errorMessage;
+                            console.log(error);}
+            );
+
+            resetForm(formId);
+
+        });
+
+        checkBox.addEventListener('change', () => {
+            if(checkBox.checked === false) {
+                statusMessage.textContent = warningMessage;
+            } else {
+                statusMessage.textContent = '';
+            }  
+        });
+        
+        const postData = (body, errorData) => {
+            const request = new XMLHttpRequest();
+
+            request.addEventListener('readystatechange', () => {  
+                if(request.readyState !== 4) {
+                    return;                }
+    
+                if(request.status === 200) {
+                    thanks.style.display = 'block';               
+                } else {
+                    errorData(request.status);                    
+                }
+            });
+
+            request.open('POST', './server.php');
+            request.setRequestHeader('Content-Type', 'application/json');
+
+            request.send(JSON.stringify(body));
+        };
+
+        const resetForm = (formId) => {
+            let form = document.getElementById(formId);            
+            let dataInputs = form.querySelectorAll('input');
+            dataInputs.forEach((input) => {
+                if(input.name !== 'form_name') {
+                    input.value = ''; 
+                }                                  
+            });  
+        };
+    };
+
+    sendForm('banner-form');
+
+
+
     
 
 

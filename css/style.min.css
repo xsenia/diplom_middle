@@ -136,3 +136,9 @@ html,body,body div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,ad
 .gallery-slider .slider-arrow {
     background: transparent;
 }
+
+/* p.personal-data input[type='checkbox'] {
+    display: block !important;
+    opacity: 1;
+    position: absolute;
+} */
