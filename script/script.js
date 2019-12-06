@@ -272,7 +272,14 @@ window.addEventListener('DOMContentLoaded', function() {
             if (this.options.infinity || this.options.position > 0) {
                 --this.options.position;
                 if (this.options.position < 0) {
-                    this.options.position = this.slides.length - this.slidesToShow;
+                   // this.options.position = this.slides.length - this.slidesToShow;
+                   //this.wrap.style.left = -(this.options.position + 2) * this.options.widthSlide + '%';
+                   this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
+                    
+                    let cloneElem = this.wrap.children[this.slides.length - 1].cloneNode(true);
+                    this.wrap.insertBefore(cloneElem, this.wrap.children[0]);                   
+                    this.wrap.removeChild(this.wrap.children[this.slides.length - 1]); 
+                    this.options.position++;                     
                 }
                 this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
             }
@@ -283,7 +290,12 @@ window.addEventListener('DOMContentLoaded', function() {
             if (this.options.infinity || this.options.position < this.slides.length - this.slidesToShow) {
                 ++this.options.position;
                 if(this.options.position > this.slides.length - this.slidesToShow) {
-                    this.options.position = 0;
+                    //this.options.position = 0;
+                    this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
+                    let cloneElem = this.wrap.children[0].cloneNode(true);
+                    this.wrap.removeChild(this.wrap.children[0]);
+                    this.wrap.append(cloneElem);
+                    this.options.position--; 
                 } 
                 this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
             }
