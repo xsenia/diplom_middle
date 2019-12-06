@@ -280,23 +280,23 @@
         <h2>выбрать карту</h2>
         <form action="" id="card_order">
             <div class="cards-types">
-                <input id="t1" type="radio" name="card-type" value="1s" checked>
+                <input id="t1" type="radio" name="card-type" value="1 мес - Соло" checked>
                 <label for="t1"><span class="long">1 месяц</span><br><span class="solo">- соло -</span><br><span
                         class="cost">1999<span class="rubl">i</span></span><br><span
                         class="frost">* Без заморозки</span></label>
-                <input id="t2" type="radio" name="card-type" value="6s">
+                <input id="t2" type="radio" name="card-type" value="6 мес - Соло">
                 <label for="t2"><span class="long">6 месяцев</span><br><span class="solo">- соло -</span><br><span
                         class="cost">9900<span class="rubl">i</span></span><br><span
                         class="frost">* Без заморозки</span></label>
-                <input id="t3" type="radio" name="card-type" value="9s">
+                <input id="t3" type="radio" name="card-type" value="9 мес - Соло">
                 <label for="t3"><span class="long">9 месяцев</span><br><span class="solo">- соло -</span><br><span
                         class="cost">13900<span class="rubl">i</span></span><br><span
                         class="frost">* Без заморозки</span></label>
-                <input id="t4" type="radio" name="card-type" value="12d">
+                <input id="t4" type="radio" name="card-type" value="12 мес - Дневная">
                 <label for="t4"><span class="long">12 месяцев</span><br><span class="solo">- дневная -</span><br><span
                         class="cost">9900<span class="rubl">i</span></span><br><span
                         class="frost">* 1 месяц заморозки</span></label>
-                <input id="t5" type="radio" name="card-type" value="12s">
+                <input id="t5" type="radio" name="card-type" value="12 мес - Соло">
                 <label for="t5"><span class="long">12 месяцев</span><br><span class="solo">- соло -</span><br><span
                         class="cost">19900<span class="rubl">i</span></span><br><span
                         class="frost">* 1 месяц заморозки</span></label>
@@ -307,12 +307,12 @@
                 </div>
                 <div class="right">
                     <input type="hidden" name="form_name" value="Заказать карту">
-                    <p class="input-text"><input name="name" type="text" required placeholder="Ваше имя..."></p>
+                    <p class="input-text"><input class="textValid" name="name" type="text" required placeholder="Ваше имя..."></p>
                     <p class="input-text"><input type="tel" name="phone" id="callback_form-phone" required
                                                  placeholder="Ваш номер телефона..."></p>
                     <div class="form-bottom">
                         <p class="personal-data">
-                            <input type="checkbox" required id="card_check"><label for="card_check">Я согласен на
+                            <input type="checkbox"  id="card_check"><label for="card_check">Я согласен на
                             обработку персональных данных</label>
                         </p>
                         <p class="submit">
@@ -413,11 +413,11 @@
         <div class="form-wrapper">
             <form name="banner-form" id="banner-form" action="#" method="post">
                 <input type="hidden" name="form_name" value=" Записаться на визит">
-                <input name="name" type="text" required placeholder="Ваше имя...">
+                <input class="textValid" name="name" type="text" required placeholder="Ваше имя...">
                 <input type="tel" name="phone" id="phone" required placeholder="Ваш номер телефона...">
                 <button name="send" class="btn" type="submit">Записаться</button>
                 <p class="personal-data">
-                    <input type="checkbox" required id="check1"><label for="check1">Я согласен на обработку персональных
+                    <input type="checkbox"  id="check1"><label for="check1">Я согласен на обработку персональных
                     данных</label>
                 </p>
             </form>
@@ -522,11 +522,11 @@
                 <h4>Обратный звонок</h4>
                 <input type="hidden" name="form_name" value=" Обратный звонок">
                 <!--  <input type="hidden" name="club" value="<?=$_GET['club-name']?>"> -->
-                <p class="input-text"><input name="name" type="text" required placeholder="Ваше имя..."></p>
+                <p class="input-text"><input class="textValid" name="name" type="text" required placeholder="Ваше имя..."></p>
                 <p class="input-text"><input type="tel" name="phone" id="callback_form1-phone" required
                                              placeholder="Ваш номер телефона..."></p>
                 <p class="personal-data">
-                    <input type="checkbox" required id="check"><label for="check">Я согласен на обработку <br>персональных
+                    <input type="checkbox"  id="check"><label for="check">Я согласен на обработку <br>персональных
                     данных</label>
 
                 </p>
@@ -547,11 +547,11 @@
             <form name="free-visit-form" id="form2" action="#" method="post">
                 <h4>Записаться на визит</h4>
                 <input type="hidden" name="form_name" value=" Записаться на визит">
-                <p class="input-text"><input name="name" type="text" required placeholder="Ваше имя..."></p>
+                <p class="input-text"><input class="textValid" name="name" type="text" required placeholder="Ваше имя..."></p>
                 <p class="input-text"><input type="tel" name="phone" id="callback_form2-phone" required
                                              placeholder="Ваш номер телефона..."></p>
                 <p class="personal-data">
-                    <input type="checkbox" required id="check2"><label for="check2">Я согласен на обработку <br>персональных
+                    <input type="checkbox"  id="check2"><label for="check2">Я согласен на обработку <br>персональных
                     данных</label>
 
                 </p>

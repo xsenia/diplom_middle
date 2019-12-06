@@ -34,7 +34,9 @@ window.addEventListener('DOMContentLoaded', function() {
                     let popupId = target.dataset.popup;
                     let popup = document.querySelector(popupId);
                     popup.style.display = (popup.style.display === 'none')  ? 'block' : 'none';  
-                    if (target.hasClass = 'fixed-gift') {
+
+                    
+                    if (target.closest('.fixed-gift')) {
                         target.style.display = 'none';
                     }                  
                 });
@@ -423,67 +425,70 @@ window.addEventListener('DOMContentLoaded', function() {
     //getPrice
 
     const getPrice = () => {
-
-        const form = document.getElementById('card_order');
         const total = document.getElementById('price-total');
-        const price = {
-            mozaika: [1999, 9900, 13900, 19900],
-            schelkovo: [2999, 14990, 21990, 24990]
-        };
-        const promoInput = document.getElementById('promocode');
-        let month = 0;
-        let club = price.mozaika;
-        let result = price.mozaika[0];
 
-        total.innerHTML = result; 
+        if (total) {
 
-        form.addEventListener(('click'), (event) => {
-            let target = event.target;
+            const form = document.getElementById('card_order');
+            
+            const price = {
+                mozaika: [1999, 9900, 13900, 19900],
+                schelkovo: [2999, 14990, 21990, 24990]
+            };
+            const promoInput = document.getElementById('promocode');
+            let month = 0;
+            let club = price.mozaika;
+            let result = price.mozaika[0];
 
-            //получаем месяцы            
-            if(target.closest('.time')) {
-                if(target.tagName === 'LABEL') {
-                    month = +target.getAttribute('for').slice(1, target.length) - 1;
+            total.innerHTML = result; 
+
+            form.addEventListener(('click'), (event) => {
+                let target = event.target;
+
+                //получаем месяцы            
+                if(target.closest('.time')) {
+                    if(target.tagName === 'LABEL') {
+                        month = +target.getAttribute('for').slice(1, target.length) - 1;
+                    }
+                } 
+
+                //получаем прайс клуба            
+                if(target.closest('.club')) {
+                    if(target.tagName === 'INPUT') {
+                        club = price[target.getAttribute('value')];                     
+                    }
                 }
-            } 
 
-            //получаем прайс клуба            
-            if(target.closest('.club')) {
-                if(target.tagName === 'INPUT') {
-                    club = price[target.getAttribute('value')];                     
-                }
-            }
+                result = club[month];
 
-            result = club[month];
-
-            if(promoInput.value === 'ТЕЛО2019') {
-                result = Math.ceil(result * 0.3);
-                total.innerHTML = result;
-
-            }
-
-            total.innerHTML = result;
-           
-        });
-
-        //promocode
-        const promocode = () => {        
-
-            promoInput.addEventListener('input', ()=> {
                 if(promoInput.value === 'ТЕЛО2019') {
-                    result = Math.ceil(result * 0.33);
+                    result = Math.ceil(result * 0.3);
                     total.innerHTML = result;
 
-                } else {
-                    console.log('нет');
                 }
+
+                total.innerHTML = result;
+            
             });
 
-        };
+            //promocode
+            const promocode = () => {        
 
-        promocode();
+                promoInput.addEventListener('input', ()=> {
+                    if(promoInput.value === 'ТЕЛО2019') {
+                        result = Math.ceil(result * 0.33);
+                        total.innerHTML = result;
+
+                    } else {
+                        console.log('нет');
+                    }
+                });
+
+            };
+
+            promocode();
         
-        
+        }
         
     };
 
@@ -497,7 +502,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
         //сообщение об ошибке
         const statusMessage = document.createElement('div');
-        statusMessage.style.cssText = 'font-size: 20px;padding-top:10px;color:#ff7100;';
+        statusMessage.style.cssText = 'font-size: 20px;padding-top:10px;color:#ff7100;max-width:400px;margin: 0 auto;';
         form.appendChild(statusMessage);
 
         //спасибка 
@@ -506,7 +511,7 @@ window.addEventListener('DOMContentLoaded', function() {
         const warningMessage = 'Необходимо подтвердить согласие на обработку персональных данных';
         const clubMessage = 'Пожалуйста, выберите клуб';
 
-        //блок с чекбоксом
+        //блок с чекбоксом на согласие
         let checkBox;
 
         if (agreement !== false) {
@@ -525,22 +530,29 @@ window.addEventListener('DOMContentLoaded', function() {
         //проверка на выбранный клуб
         const footerForm = document.getElementById('footer_form');
         const clubFooter = document.querySelectorAll('#footer_form .club > input[type="radio"]');
-        let clubFooterChecked = false;
+
+        let clubChecked = false;
         
         clubFooter.forEach((elem) => {
             if(elem.checked) {
-                clubFooterChecked = true;
+                clubChecked = true;
             }
         });
 
-        if(!clubFooterChecked) {
+        if(!clubChecked) {
             footerForm.addEventListener('click',(event)=>{
                 let target = event.target;
                            
                 if(target.closest('.club')) {
                     statusMessage.textContent = '';
-                    clubFooterChecked = true;
-                } 
+                    clubChecked = true;
+                }
+
+                clubFooter.forEach((elem) => {
+                    if(elem.checked) {
+                        clubChecked = true;
+                    }
+                });
                 
             });
         }
@@ -548,6 +560,9 @@ window.addEventListener('DOMContentLoaded', function() {
         
         form.addEventListener('submit', (event) => {            
             event.preventDefault();
+            let target = event.target;
+            
+
 
             //предупреждение об ошибке
             form.appendChild(statusMessage);
@@ -569,12 +584,17 @@ window.addEventListener('DOMContentLoaded', function() {
                 }
             }
             
-            if(!clubFooterChecked) {
-                statusMessage.textContent = clubMessage;
-                return;
-            } else {
-                statusMessage.textContent = '';
+            //проверка на выбранный клуб
+            if(target.closest('#footer_form')) {
+                if(!clubChecked) {
+                    statusMessage.textContent = clubMessage;
+                    return;
+                } else {
+                    statusMessage.textContent = '';
+                }
             }
+
+            
 
             //отправка данных
             postData(body);
@@ -616,7 +636,7 @@ window.addEventListener('DOMContentLoaded', function() {
             let form = document.getElementById(formId);            
             let dataInputs = form.querySelectorAll('input');
             dataInputs.forEach((input) => {
-                if(input.name !== 'form_name') {
+                if(input.name !== 'form_name' || input.name !== 'card-type') {
                     input.value = ''; 
                 }                                  
             });  
@@ -625,6 +645,9 @@ window.addEventListener('DOMContentLoaded', function() {
 
     sendForm('banner-form','check1');
     sendForm('footer_form',false);
+    sendForm('card_order','card_check');
+    sendForm('form1','check');
+    sendForm('form2','check2');
 
 
     //Валидатор ввода телефона
@@ -638,6 +661,19 @@ window.addEventListener('DOMContentLoaded', function() {
         });        
     };
     phoneValidator();
+
+    //Валидатор ввода кириллицы
+
+    const textValidator = () => {
+        const input = document.querySelectorAll('.textValid');
+
+        input.forEach((elem) => {
+            elem.addEventListener('input', () => {
+                elem.value = elem.value.replace(/[a-z\d]/g, '');
+            });
+        });        
+    };
+    textValidator();
 
 
 

@@ -144,3 +144,13 @@ html,body,body div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,ad
 }
 
 * {color: red;} */
+.popup .overlay {
+    z-index: 2020;
+}
+.popup .form-wrapper {
+    z-index: 2200;
+}
+
+html#mozaika .head-slider .slider-image, html#schelkovo .head-slider .slider-image {
+    max-width: none;
+}
