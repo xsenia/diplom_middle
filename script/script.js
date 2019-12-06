@@ -672,6 +672,9 @@ window.addEventListener('DOMContentLoaded', function() {
         input.forEach((elem) => {
             elem.addEventListener('input', () => {
                 elem.value = elem.value.replace(/[^0-9+]/, '');
+                if(elem.value.length > 12) {
+                    elem.value = elem.value.slice(0,12);
+                }
             });
         });        
     };
