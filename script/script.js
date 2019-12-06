@@ -479,8 +479,6 @@ window.addEventListener('DOMContentLoaded', function() {
                         result = Math.ceil(result * 0.33);
                         total.innerHTML = result;
 
-                    } else {
-                        console.log('нет');
                     }
                 });
 
@@ -504,6 +502,11 @@ window.addEventListener('DOMContentLoaded', function() {
         const statusMessage = document.createElement('div');
         statusMessage.style.cssText = 'font-size: 20px;padding-top:10px;color:#ff7100;max-width:400px;margin: 0 auto;';
         form.appendChild(statusMessage);
+
+        const loadMessage = document.createElement('div');
+        const loadText = 'Загрузка...';
+        loadMessage.style.cssText = 'font-size: 20px;padding-top:10px;color:#ff7100;max-width:400px;margin: 0 auto;';
+        form.appendChild(loadMessage);
 
         //спасибка 
         const thanks = document.getElementById('thanks');
@@ -560,27 +563,32 @@ window.addEventListener('DOMContentLoaded', function() {
         
         form.addEventListener('submit', (event) => {            
             event.preventDefault();
-            let target = event.target;
+            let target = event.target; 
             
-
-
             //предупреждение об ошибке
             form.appendChild(statusMessage);
+
+            // загрузка
+            form.appendChild(loadMessage);
+            loadMessage.textContent = loadText;
 
             //собираем данные с формы
             const formData = new FormData(form);
             let body = {};             
             formData.forEach((val,key) => {
                 body[key] = val; 
-            });                 
+            }); 
             
             //блок с чекбоксом
-            if (agreement !== false) {                    
+            if (agreement !== false) { 
+                                   
                 if(checkBox && checkBox.checked === false) {
                     statusMessage.textContent = warningMessage;
+                    loadMessage.textContent = '';
                     return;
                 } else {
                     statusMessage.textContent = '';
+                    loadMessage.textContent = loadText;
                 }
             }
             
@@ -615,6 +623,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 }    
                 if(request.status === 200) {
                     thanks.style.display = 'block';
+                    loadMessage.textContent = '';
                 } else {
                     //предупреждение об ошибке
                     thanks.style.display = 'block';
@@ -639,7 +648,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 if(input.name !== 'form_name' || input.name !== 'card-type') {
                     input.value = ''; 
                 }                                  
-            });  
+            });
         };
     };
 
