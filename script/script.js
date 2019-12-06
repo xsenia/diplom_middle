@@ -504,7 +504,13 @@ window.addEventListener('DOMContentLoaded', function() {
         form.appendChild(statusMessage);
 
         const loadMessage = document.createElement('div');
-        const loadText = 'Загрузка...';
+        const loadText = `<div class="container-load">
+                            <div class="item-1"></div>
+                            <div class="item-2"></div>
+                            <div class="item-3"></div>
+                            <div class="item-4"></div>
+                            <div class="item-5"></div>
+                        </div>`;
         loadMessage.style.cssText = 'font-size: 20px;padding-top:10px;color:#ff7100;max-width:400px;margin: 0 auto;';
         form.appendChild(loadMessage);
 
@@ -570,7 +576,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
             // загрузка
             form.appendChild(loadMessage);
-            loadMessage.textContent = loadText;
+            loadMessage.innerHTML = loadText;
 
             //собираем данные с формы
             const formData = new FormData(form);
@@ -584,11 +590,11 @@ window.addEventListener('DOMContentLoaded', function() {
                                    
                 if(checkBox && checkBox.checked === false) {
                     statusMessage.textContent = warningMessage;
-                    loadMessage.textContent = '';
+                    loadMessage.innerHTML = '';
                     return;
                 } else {
                     statusMessage.textContent = '';
-                    loadMessage.textContent = loadText;
+                    loadMessage.innerHTML = loadText;
                 }
             }
             
@@ -623,7 +629,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 }    
                 if(request.status === 200) {
                     thanks.style.display = 'block';
-                    loadMessage.textContent = '';
+                    loadMessage.innerHTML = '';
                 } else {
                     //предупреждение об ошибке
                     thanks.style.display = 'block';
