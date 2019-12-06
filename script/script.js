@@ -488,68 +488,123 @@ window.addEventListener('DOMContentLoaded', function() {
 
 
     //Send ajax form
-    const sendForm = (formId) => {
-        const errorMessage = 'Что то пошло не так',
-        warningMessage = 'Необходимо подтвердить согласие';
-
+    const sendForm = (formId,agreement) => {
+        //форма
         const form = document.getElementById(formId);
-        const thanks = document.getElementById('thanks');
-        const checkBox = document.getElementById('check1');
 
+        //сообщение об ошибке
         const statusMessage = document.createElement('div');
-        statusMessage.style.cssText = 'font-size: 20px;padding-top:10px;color:red;';
-        
-        form.addEventListener('submit', (event) => {
+        statusMessage.style.cssText = 'font-size: 20px;padding-top:10px;color:#ff7100;';
+        form.appendChild(statusMessage);
+
+        //спасибка 
+        const thanks = document.getElementById('thanks');
+        const thanksContent = document.querySelector('#thanks .form-content');
+        const warningMessage = 'Необходимо подтвердить согласие на обработку персональных данных';
+        const clubMessage = 'Пожалуйста, выберите клуб';
+
+        //блок с чекбоксом
+        let checkBox;
+
+        if (agreement !== false) {
+            checkBox = document.getElementById(agreement);           
             
+            checkBox.addEventListener('change', () => {
+                if(checkBox && checkBox.checked === false) {
+                    statusMessage.textContent = warningMessage;
+                } else {
+                    statusMessage.textContent = '';
+                }  
+            });
+            
+        } 
+
+        //проверка на выбранный клуб
+        const footerForm = document.getElementById('footer_form');
+        const clubFooter = document.querySelectorAll('#footer_form .club > input[type="radio"]');
+        let clubFooterChecked = false;
+        
+        clubFooter.forEach((elem) => {
+            if(elem.checked) {
+                clubFooterChecked = true;
+            }
+        });
+
+        if(!clubFooterChecked) {
+            footerForm.addEventListener('click',(event)=>{
+                let target = event.target;
+                           
+                if(target.closest('.club')) {
+                    statusMessage.textContent = '';
+                    clubFooterChecked = true;
+                } 
+                
+            });
+        }
+        
+        
+        form.addEventListener('submit', (event) => {            
             event.preventDefault();
+
+            //предупреждение об ошибке
             form.appendChild(statusMessage);
 
+            //собираем данные с формы
             const formData = new FormData(form);
             let body = {};             
             formData.forEach((val,key) => {
                 body[key] = val; 
-            });            
-
-            if(checkBox.checked === false) {
-                statusMessage.textContent = warningMessage;
+            });                 
+            
+            //блок с чекбоксом
+            if (agreement !== false) {                    
+                if(checkBox && checkBox.checked === false) {
+                    statusMessage.textContent = warningMessage;
+                    return;
+                } else {
+                    statusMessage.textContent = '';
+                }
+            }
+            
+            if(!clubFooterChecked) {
+                statusMessage.textContent = clubMessage;
                 return;
             } else {
                 statusMessage.textContent = '';
-            }            
+            }
 
-            postData(body,                
-                (error) => { statusMessage.textContent = errorMessage;
-                            console.log(error);}
-            );
+            //отправка данных
+            postData(body);
 
+            //очистка формы
             resetForm(formId);
 
         });
-
-        checkBox.addEventListener('change', () => {
-            if(checkBox.checked === false) {
-                statusMessage.textContent = warningMessage;
-            } else {
-                statusMessage.textContent = '';
-            }  
-        });
         
-        const postData = (body, errorData) => {
+        
+        //отправка данных
+        const postData = (body) => {
             const request = new XMLHttpRequest();
 
             request.addEventListener('readystatechange', () => {  
                 if(request.readyState !== 4) {
-                    return;                }
-    
+                    return;                
+                }    
                 if(request.status === 200) {
-                    thanks.style.display = 'block';               
+                    thanks.style.display = 'block';
                 } else {
-                    errorData(request.status);                    
+                    //предупреждение об ошибке
+                    thanks.style.display = 'block';
+                    thanksContent.innerHTML = `<div class="form-content">
+                        <h4>Извините!</h4>
+                        <p>Что-то пошло не так.<br> Ваша заявка не отправлена.</p>
+                        <button class="btn close-btn">Закрыть</button>
+                    </div>`;                    
                 }
             });
 
             request.open('POST', './server.php');
-            request.setRequestHeader('Content-Type', 'application/json');
+            request.setRequestHeader('Content-Type', 'application/json');            
 
             request.send(JSON.stringify(body));
         };
@@ -565,7 +620,21 @@ window.addEventListener('DOMContentLoaded', function() {
         };
     };
 
-    sendForm('banner-form');
+    sendForm('banner-form','check1');
+    sendForm('footer_form',false);
+
+
+    //Валидатор ввода телефона
+
+    const phoneValidator = () => {
+        const input = document.querySelectorAll('input[type="tel"]');
+        input.forEach((elem) => {
+            elem.addEventListener('input', () => {
+                elem.value = elem.value.replace(/[^0-9+]/, '');
+            });
+        });        
+    };
+    phoneValidator();
 
 
 
