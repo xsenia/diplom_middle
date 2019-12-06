@@ -33,7 +33,10 @@ window.addEventListener('DOMContentLoaded', function() {
                     target.classList.add('active');
                     let popupId = target.dataset.popup;
                     let popup = document.querySelector(popupId);
-                    popup.style.display = (popup.style.display === 'none')  ? 'block' : 'none';                    
+                    popup.style.display = (popup.style.display === 'none')  ? 'block' : 'none';  
+                    if (target.hasClass = 'fixed-gift') {
+                        target.style.display = 'none';
+                    }                  
                 });
             });
 
@@ -51,7 +54,7 @@ window.addEventListener('DOMContentLoaded', function() {
                                 elem.style.display = 'none'
                             }
                         });
-                    }              
+                    }            
                 });  
             });
 
