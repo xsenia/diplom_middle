@@ -608,8 +608,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 }
             }
 
-            console.log('body ', body.phone.length);
-
+            
             if(body.phone && body.phone.length < 4) {
                 statusMessage.textContent = 'номер телефона не может быть меньше 4';
                 loadMessage.innerHTML = '';
