@@ -608,7 +608,13 @@ window.addEventListener('DOMContentLoaded', function() {
                 }
             }
 
-            
+            console.log('body ', body.phone.length);
+
+            if(body.phone && body.phone.length < 4) {
+                statusMessage.textContent = 'номер телефона не может быть меньше 4';
+                loadMessage.innerHTML = '';
+                return;
+            }
 
             //отправка данных
             postData(body);
@@ -674,7 +680,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 elem.value = elem.value.replace(/[^0-9+]/, '');
                 if(elem.value.length > 12) {
                     elem.value = elem.value.slice(0,12);
-                }
+                }                
             });
         });        
     };
