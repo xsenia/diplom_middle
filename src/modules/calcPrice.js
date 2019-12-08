@@ -34,7 +34,6 @@ const calcPrice = () => {
             }
 
             result = club[month];
-            console.log('result: ', result);
 
             if(promoInput.value === 'ТЕЛО2019') {
                 result = Math.ceil(result * 0.7);
